@@ -5,184 +5,176 @@
   <meta charset="utf-8">
   <title>Home</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: #f0f0f0;
-    }
-
-    header {
-      width: 100%;
-      background-color: #1486bb;
-      margin: 0;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    header h1 {
-      color: #353333;
-      padding: 20px;
-      animation: headerMove 1.2s;
-      animation-fill-mode: backwards;
-    }
-
-    @keyframes headerMove {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-        transform: translateX(60px);
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
       }
 
-      100% {
-        opacity: 1;
-        transform: scale(1);
-        transform: translateX(0px);
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          padding-bottom: 40px; /* Ajuste para acomodar o rodapé */
+          position: relative; /* Definindo o corpo como relativo */
+          min-height: 100vh; /* Garante altura mínima de visualização */
       }
-    }
 
-    header nav {
-      align-items: center;
-      display: flex;
-      padding-right: 30px;
-    }
+      header {
+          width: 100%;
+          background-color: #1486bb;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px;
+          border-radius: 8px 8px 0 0;
+      }
 
-    header nav a {
-      color: #353333;
-      text-decoration: none;
-      margin-right: 10px;
-    }
+      header h1 {
+          color: #fff;
+      }
 
-    header nav a:hover {
-      color: #a8a8a8;
-    }
+      header nav {
+          display: flex;
+      }
 
-    div {
-      width: 90%;
-      margin: 30px auto 60px auto; /* Ajuste na margem para acomodar o rodapé */
-      padding: 20px;
-    }
+      header nav a {
+          color: #fff;
+          text-decoration: none;
+          margin-right: 10px;
+      }
 
-    div table {
-      background-color: #e0e0e0;
-      width: 60%;
-      margin: auto;
-      padding: 10px;
-      border: 1px solid #a8a8a8;
-      border-radius: 10px;
-    }
+      header nav a:hover {
+          color: #a8a8a8;
+      }
 
-    div table td {
-      padding: 2px;
-    }
+      div {
+          width: 90%;
+          margin: 30px auto;
+          padding: 20px;
+      }
 
-    div table td#title {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      padding-bottom: 10px;
-    }
+      div table {
+          background-color: #fff;
+          width: 60%;
+          margin: auto;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
-    div table td.cliente {
-      padding: 10px;
-    }
+      div table td {
+          padding: 5px;
+          font-size: 16px;
+      }
 
-    div table td.cliente:hover {
-      background-color: #42a4d1;
-      cursor: pointer;
-    }
+      div table td#title {
+          font-size: 18px;
+          font-weight: bold;
+          padding-bottom: 10px;
+      }
 
-    div table td.cliente a {
-      text-decoration: none;
-      color: #000;
-    }
+      div table td.cliente {
+          padding: 10px;
+      }
 
-    footer {
-      background-color: #1486bb;
-      text-align: center;
-      width: 100%;
-      position: fixed; /* Fixando o rodapé */
-      bottom: 0; /* Alinhando no fundo */
-    }
+      div table td.cliente:hover {
+          background-color: #42a4d1;
+          cursor: pointer;
+      }
 
-    footer h3 {
-      padding: 10px 0;
-      color: #353333;
-    }
+      div table td.cliente a {
+          text-decoration: none;
+          color: #000;
+      }
+
+      footer {
+          background-color: #1486bb;
+          text-align: center;
+          color: #fff;
+          padding: 10px 0;
+          border-radius: 8px;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+      }
+
+      footer h3 {
+          margin: 0;
+      }
   </style>
 </head>
 
 <body>
-  <header>
-    <span>
-      <h1>Listar clientes e funcionários</h1>
-    </span>
-    <nav>
-      <a href="{% url 'add_cliente' %}">Novo Cliente</a>
-      <a href="{% url 'add_funcionario' %}">Novo Funcionario</a>
-      <a href="{% url 'add_gerente' %}">Novo Gerente</a>
-    </nav>
-  </header>
-  <div>
-    <table>
-      <tr>
-        <td id="title">
-          Usuários
-        </td>
-      </tr>
-      {% for cliente in clientes  %}
-      <tr>
-        <td class="cliente">
-          <a href="{% url 'detalhes_cliente' cliente.pk%}">
-            {{cliente.nome}} - {{cliente.cpf}} - {{cliente.endereco}}
-          </a>
-        </td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
+    <header>
+        <span>
+            <h1>Listar clientes e funcionários</h1>
+        </span>
+        <nav>
+            <a href="{% url 'add_cliente' %}">Novo Cliente</a>
+            <a href="{% url 'add_funcionario' %}">Novo Funcionario</a>
+            <a href="{% url 'add_gerente' %}">Novo Gerente</a>
+        </nav>
+    </header>
+    <div>
+        <table>
+            <tr>
+                <td id="title">
+                    Usuários
+                </td>
+            </tr>
+            {% for cliente in clientes  %}
+            <tr>
+                <td class="cliente">
+                    <a href="{% url 'detalhes_cliente' cliente.pk%}">
+                        {{cliente.nome}} - {{cliente.cpf}} - {{cliente.endereco}}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 
-  <div>
-    <table>
-      <tr>
-        <td id="title">
-          Funcionários
-        </td>
-      </tr>
-      {% for funcionario in funcionarios  %}
-      <tr>
-        <td class="cliente">
-          <a href="{% url 'detalhes_funcionario' funcionario.pk%}">
-            {{funcionario.nome}} - {{funcionario.cpf}}
-          </a>
-        </td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
-<div>
-  <table>
-    <tr>
-      <td id="title">
-        Gerentes
-      </td>
-    </tr>
-    {% for gerente in gerentes %}
-    <tr>
-      <td class="cliente">
-        <a href="{% url 'detalhes_gerente' gerente.pk %}">
-          {{ gerente.nome }}
-        </a>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-  <footer>
-    <h3>© 2023 - Jackson Ricardo</h3>
-  </footer>
+    <div>
+        <table>
+            <tr>
+                <td id="title">
+                    Funcionários
+                </td>
+            </tr>
+            {% for funcionario in funcionarios  %}
+            <tr>
+                <td class="cliente">
+                    <a href="{% url 'detalhes_funcionario' funcionario.pk%}">
+                        {{funcionario.nome}} - {{funcionario.cpf}}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <td id="title">
+                    Gerentes
+                </td>
+            </tr>
+            {% for gerente in gerentes %}
+            <tr>
+                <td class="cliente">
+                    <a href="{% url 'detalhes_gerente' gerente.pk %}">
+                        {{ gerente.nome }}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <footer>
+        <h3>© 2023 - Jackson Ricardo</h3>
+    </footer>
 </body>
 
 </html>
