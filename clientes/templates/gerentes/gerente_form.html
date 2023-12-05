@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Adicionar Gerente</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Adicionar Gerentes</h1>
+    </header>
+    <form action="" method="POST">
+        <div class="form-container">
+            <div class="form">
+                {% csrf_token %}
+                {{ form.nome.label_tag }}
+                {{ form.nome }}
+            </div>
+            <input class="submit" type="submit" value="{% if gerente %}Atualizar{% else %}Cadastrar{% endif %}">
+        </div>
+    </form>
+    <footer>
+        <h3>© 2023 - Jackson Ricardo</h3>
+    </footer>
+</body>
+</html>
