@@ -2,62 +2,72 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Adicionar clientes</title>
     <style>
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        body {  
+        body {
+            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            min-height: 100vh; /* Garante que a altura do corpo ocupe pelo menos a altura da janela de visualização */
-            position: relative; /* Torna o corpo um contexto para posicionar o rodapé */
+            min-height: 100vh;
+            position: relative;
         }
 
         header {
             width: 100%;
             background-color: #1486bb;
-            margin: 0;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-radius: 8px 8px 0 0;
         }
 
         header h1 {
-            color: #353333;
+            color: #fff;
+        }
+
+        form {
+            width: 60%;
+            margin: 0 auto;
             padding: 20px;
-            animation: move 700ms;
-            animation-fill-mode: backwards;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes move {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            } 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        div.form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        div.form {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
         }
 
         form input[type="text"],
         form input[type="email"],
-        form input[type="password"],
-        form select {
-            display: block;
+        form input[type="password"] {
+            width: calc(100% - 12px);
+            padding: 8px;
             margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form .custom-field {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        form .custom-field label {
+            margin-bottom: 5px;
+        }
+
+        form .custom-field select {
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -65,53 +75,36 @@
             box-sizing: border-box;
         }
 
-        form input.submit {
-            padding: 15px 28px;
-            border-radius: 10px;
-            background-color: #1486bb;
-            color: #f0f0f0;
-            border: 0px;
+        form .submit-container {
+            text-align: center;
         }
 
-        form input.submit:hover {
-            background-color: #f0f0f0;
-            color: #1486bb;
-            border: 1px solid #ccc;
+        form input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #1486bb;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #0e5d87;
         }
 
         footer {
             background-color: #1486bb;
             text-align: center;
-            width: 100%;
+            color: #fff;
             padding: 10px 0;
+            border-radius: 0 0 8px 8px;
             position: absolute;
-            bottom: 0; /* Fixa o rodapé no fundo da janela */
-            left: 0;
+            bottom: 0;
+            width: 100%;
         }
 
         footer h3 {
-            padding: 10px 0;
-            color: #353333;
-        }
-
-        /* Estilos personalizados para o campo funcionario */
-        .custom-field {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .custom-field label {
-            margin-bottom: 5px;
-        }
-
-        .custom-field select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 300px;
-            box-sizing: border-box;
+            margin: 0;
         }
     </style>
 </head>
@@ -120,22 +113,20 @@
         <h1>Adicionar clientes</h1>
     </header>
     <form action="" method="POST">
-        <div class="form-container">
-            <div class="form">
-                {% csrf_token %}
-                {{ form.nome.label_tag }}
-                {{ form.nome }}
-                {{ form.endereco.label_tag }}
-                {{ form.endereco }}
-                {{ form.telefone.label_tag }}
-                {{ form.telefone }}
-                {{ form.cpf.label_tag }}
-                {{ form.cpf }}
-                <div class="custom-field">
-                    {{ form.funcionario.label_tag }}
-                    {{ form.funcionario }}
-                </div>
-            </div>
+        {% csrf_token %}
+        {{ form.nome.label_tag }}
+        {{ form.nome }}
+        {{ form.endereco.label_tag }}
+        {{ form.endereco }}
+        {{ form.telefone.label_tag }}
+        {{ form.telefone }}
+        {{ form.cpf.label_tag }}
+        {{ form.cpf }}
+        <div class="custom-field">
+            {{ form.funcionario.label_tag }}
+            {{ form.funcionario }}
+        </div>
+        <div class="submit-container">
             <input class="submit" type="submit" value="{% if cliente %}Atualizar{% else %}Cadastrar{% endif %}">
         </div>
     </form>
