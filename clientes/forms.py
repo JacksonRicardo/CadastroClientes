@@ -9,11 +9,17 @@ class GerenteForm(forms.ModelForm):
         fields = ['nome']
 
 class FuncionarioForm(forms.ModelForm):
-    class Meta:
-        model = Funcionario
-        fields = ['nome', 'apelido', 'snap', 'cpf', 'gerente']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['gerente'].widget.attrs['class'] = 'custom-select'
 
+    gerente = forms.ModelChoiceField(queryset=Gerente.objects.all(), required=False)
+
+    class Meta:
+            model = Funcionario
+            fields = ['nome', 'apelido', 'snap', 'cpf', 'gerente']
 class ClienteForm(forms.ModelForm):
+    funcionario = forms.ModelChoiceField(queryset=Funcionario.objects.all(), required=False)
     class Meta:
         model = Cliente
         fields = ['nome', 'endereco', 'telefone', 'cpf', 'funcionario']
