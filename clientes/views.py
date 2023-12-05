@@ -1,17 +1,19 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Cliente, Funcionario
-from .forms import ClienteForm, FuncionarioForm
+from .models import Cliente, Funcionario, Gerente
+from .forms import ClienteForm, FuncionarioForm, GerenteForm
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 
 def home(request):
     clientes = Cliente.objects.all()
     funcionarios = Funcionario.objects.all()
+    gerentes = Gerente.objects.all()
     contexto = {
         'clientes': clientes,
-        'funcionarios': funcionarios,      
+        'funcionarios': funcionarios,
+        'gerentes': gerentes,   
     }
     resposta = render(request, template_name="clientes/home.html", context=contexto)
     return HttpResponse(resposta)
@@ -73,8 +75,30 @@ def detalhes_funcionario(request, pk):
     }
     return render(request, template_name="funcionarios/funcionario.html", context=contexto)
 
+def detalhes_gerente(request, pk):
+    gerente = get_object_or_404(Gerente, pk=pk)
+    funcionarios = Funcionario.objects.filter(gerente=gerente)  # Obtém os funcionários gerenciados por este gerente
+    contexto = {
+        'gerente': gerente,
+        'funcionarios': funcionarios,  # Adiciona os funcionários gerenciados por este gerente ao contexto
+    }
+    return render(request, template_name="gerentes/gerente.html", context=contexto)
+
 
 def deleta_funcionario(request, pk):
     funcionario = Funcionario.objects.get(pk=pk)
     funcionario.delete()
     return redirect('home')  
+
+class GerenteUpdateView(UpdateView):
+    model = Gerente
+    form_class = GerenteForm
+    template_name = "gerentes/gerente_form.html"
+    success_url = reverse_lazy('home')  
+
+class GerenteCreateView(CreateView):
+    model = Gerente
+    fields = ['nome']
+    template_name = "gerentes/gerente_create.html"
+    success_url = reverse_lazy('home')
+

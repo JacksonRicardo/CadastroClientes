@@ -122,6 +122,7 @@
     <nav>
       <a href="{% url 'add_cliente' %}">Novo Cliente</a>
       <a href="{% url 'add_funcionario' %}">Novo Funcionario</a>
+      <a href="{% url 'add_gerente' %}">Novo Gerente</a>
     </nav>
   </header>
   <div>
@@ -161,6 +162,24 @@
       {% endfor %}
     </table>
   </div>
+<div>
+  <table>
+    <tr>
+      <td id="title">
+        Gerentes
+      </td>
+    </tr>
+    {% for gerente in gerentes %}
+    <tr>
+      <td class="cliente">
+        <a href="{% url 'detalhes_gerente' gerente.pk %}">
+          {{ gerente.nome }}
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
   <footer>
     <h3>© 2023 - Jackson Ricardo</h3>
   </footer>
