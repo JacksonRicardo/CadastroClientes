@@ -135,7 +135,7 @@
       <tr>
         <td class="cliente">
           <a href="{% url 'detalhes_cliente' cliente.pk%}">
-            {{cliente.nome}} - {{cliente.endereco}}
+            {{cliente.nome}} - {{cliente.cpf}} - {{cliente.endereco}}
           </a>
         </td>
       </tr>
@@ -147,14 +147,14 @@
     <table>
       <tr>
         <td id="title">
-          Funcionarios
+          Funcionários
         </td>
       </tr>
       {% for funcionario in funcionarios  %}
       <tr>
         <td class="cliente">
           <a href="{% url 'detalhes_funcionario' funcionario.pk%}">
-            {{funcionario.nome}} - {{funcionario.apelido}}
+            {{funcionario.nome}} - {{funcionario.cpf}}
           </a>
         </td>
       </tr>
