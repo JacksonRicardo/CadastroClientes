@@ -2,12 +2,11 @@ from django import forms
 from .models import Cliente, Funcionario
 
 class ClienteForm(forms.ModelForm):
-    # Adiciona um campo para selecionar o funcionário no formulário
-    funcionario = forms.ModelChoiceField(queryset=Funcionario.objects.all(), required=False)  # Este campo é opcional
+    funcionario = forms.ModelChoiceField(queryset=Funcionario.objects.all(), required=False)  
 
     class Meta:
         model = Cliente
-        fields = ('nome', 'endereco', 'telefone', 'cpf', 'funcionario')  # Adiciona o campo funcionario ao formulário
+        fields = ('nome', 'endereco', 'telefone', 'cpf', 'funcionario')
 
 class FuncionarioForm(forms.ModelForm):
     class Meta:
