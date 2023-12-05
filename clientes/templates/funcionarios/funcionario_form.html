@@ -39,16 +39,35 @@
       }
     }
 
+    div.form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
     div.form {
       padding: 20px;
       display: flex;
-      justify-content: space-evenly;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"] {
+      display: block;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 300px;
+      box-sizing: border-box;
     }
 
     form input.submit {
-      display: block;
-      margin: 30px auto;
-      padding: 6px 12px 6px 12px;
+      padding: 15px 28px;
+      border-radius: 10px;
       background-color: #1486bb;
       color: #f0f0f0;
       border: 0px;
@@ -81,11 +100,13 @@
     <h1>Adicionar Funcionários</h1>
   </header>
   <form action="" method="POST">
-    <div class="form">
-      {% csrf_token %}
-      {{ form }}
+    <div class="form-container">
+      <div class="form">
+        {% csrf_token %}
+        {{ form }}
+      </div>
+      <input class="submit" type="submit" value="{% if cliente %}Atualizar{% else %}Cadastrar{% endif %}">
     </div>
-    <input class="submit" type="submit" value="{% if cliente %}Atualizar{% else %}cadastrar{% endif %}">
   </form>
   <footer>
     <h3>© 2023 - Jackson Ricardo</h3>
