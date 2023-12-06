@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>Cliente - {{ cliente.nome }} </title>
+    <title>Cliente - {{ funcionario.nome }} </title>
     <style>
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {  
+            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+            padding-bottom: 40px; /* Ajuste para acomodar o rodapé */
+            position: relative; /* Definindo o corpo como relativo */
+            min-height: 100vh; /* Garante altura mínima de visualização */
         }
 
         header {
             width: 100%;
             background-color: #1486bb;
-            margin: 0;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
         }
 
         header h1 {
-            color: #353333;
-            padding: 20px 60px 20px 0;
+            color: #fff;
         }
 
         header a {
             text-decoration: none;
-            color: #e0e0e0;
+            color: #fff;
             font-size: 20px;
-            margin: auto 0 auto 0;
-            padding-left: 40px;
+            margin-right: 10px;
         }
 
         header a:hover {
-            font-size: 22px;
+            color: #a8a8a8;
         }
 
         div {
@@ -45,65 +51,80 @@
         }
 
         div table {
-            background-color: #e0e0e0;
+            background-color: #fff;
             width: 60%;
             margin: auto;
             padding: 10px;
-            border: 1px solid #a8a8a8;
-            border-radius: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         div table td {
-            padding: 2px;
+            padding: 5px;
+            font-size: 16px;
         }
 
-        div table tr#title td {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        div table td#title {
             font-size: 18px;
-            font-weight: 600;
+            font-weight: bold;
             padding-bottom: 10px;
         }
 
-        div div#button {
-            width: 100%;
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            padding: 20px 0px 20px 0;
+        div table td.cliente {
+            padding: 10px;
         }
 
-        div div#button button#deletar {
-            background-color:#c43434;
-            padding: 15px 28px 15px 28px;
-            border: 1px solid #4e4e4e;
-            color: #cccccc;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-
-        div div#button a#update {
-            background-color: #1486bb;
-            padding: 15px 28px 15px 28px;
-            border: 1px solid #4e4e4e;
-            color: #cccccc;
+        div table td.cliente a {
             text-decoration: none;
-            margin-left: 20px;
-            cursor: pointer;
-            border-radius: 10px;
+            color: #000;
         }
 
         footer {
             background-color: #1486bb;
             text-align: center;
+            color: #fff;
+            padding: 10px 0;
+            border-radius: 8px;
             position: absolute;
-            bottom: 0px;
-            left: 0px;
+            bottom: 0;
             width: 100%;
         }
 
         footer h3 {
-            padding: 10px 0 10px 0;
-            color: #353333;
+            margin: 0;
+        }
+
+        #button {
+            width: 100%;
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        #button button#deletar {
+            background-color: #c43434;
+            padding: 15px 28px;
+            border: 1px solid #4e4e4e;
+            color: #cccccc;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        #button button#deletar:hover {
+            background-color: #9c2c2c;
+        }
+
+        #button a#update {
+            background-color: #1486bb;
+            padding: 15px 28px;
+            border: 1px solid #4e4e4e;
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 20px;
+            cursor: pointer;
+            border-radius: 8px;
         }
     </style>
     
@@ -114,15 +135,16 @@
         }
     </script>
 </head>
+
 <body>
     <header>
         <a href="{% url 'home' %}">Voltar</a>
         <h1>{{funcionario.nome}}</h1>
-    </header>    
+    </header>
     <div>
         <table>
-            <tr id="title">
-                <td>
+            <tr>
+                <td id="title">
                     Apelido
                 </td>
                 <td>
@@ -143,7 +165,7 @@
                     {{funcionario.cpf}}
                 </td>
             </tr>
-        </table> 
+        </table>
         <div id="button">
             <button id="deletar" onclick="confirmDeleta()">Excluir</button>
             <a id="update" href="{% url 'update_funcionario' funcionario.pk %}">Atualizar</a>
