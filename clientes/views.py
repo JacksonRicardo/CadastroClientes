@@ -44,10 +44,10 @@ class ClienteUpdateView(UpdateView):
 
 def detalhes_cliente(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
-    funcionario_atende = cliente.funcionario  # Obter o funcionário que atende este cliente, se existir
+    funcionario_atende = cliente.funcionario  
     contexto = {
         'cliente': cliente,
-        'funcionario_atende': funcionario_atende,  # Adicionar o funcionário que atende este cliente ao contexto
+        'funcionario_atende': funcionario_atende, 
     }
     return render(request, template_name="clientes/cliente.html", context=contexto)
     
@@ -74,10 +74,10 @@ class FuncionarioUpdateView(UpdateView):
 
 def detalhes_funcionario(request, pk):
     funcionario = get_object_or_404(Funcionario, pk=pk)
-    clientes_atendidos = Cliente.objects.filter(funcionario=funcionario)  # Obter clientes atendidos por este funcionário
+    clientes_atendidos = Cliente.objects.filter(funcionario=funcionario)  
     contexto = {
         'funcionario': funcionario,
-        'clientes_atendidos': clientes_atendidos,  # Adicionar os clientes atendidos por este funcionário ao contexto
+        'clientes_atendidos': clientes_atendidos,  
     }
     return render(request, template_name="funcionarios/funcionario.html", context=contexto)
 
