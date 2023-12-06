@@ -86,9 +86,14 @@ def detalhes_gerente(request, pk):
     funcionarios = Funcionario.objects.filter(gerente=gerente)  # Obtém os funcionários gerenciados por este gerente
     contexto = {
         'gerente': gerente,
-        'funcionarios': funcionarios,  # Adiciona os funcionários gerenciados por este gerente ao contexto
+        'funcionarios': funcionarios,  
     }
     return render(request, template_name="gerentes/gerente.html", context=contexto)
+
+def deleta_gerente(request, pk):
+    gerente = Gerente.objects.get(pk=pk)
+    gerente.delete()
+    return redirect('home')
 class GerenteUpdateView(UpdateView):
     model = Gerente
     form_class = GerenteForm
@@ -100,12 +105,6 @@ class GerenteCreateView(CreateView):
     fields = ['nome']
     template_name = "gerentes/gerente_create.html"
     success_url = reverse_lazy('home')
-    
-from django.contrib.auth import authenticate, login
-
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render, redirect
 
 def login_view(request):
     if request.method == 'POST':
