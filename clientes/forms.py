@@ -1,7 +1,9 @@
 # forms.py
-
 from django import forms
+from django.shortcuts import redirect, render
 from .models import Cliente, Funcionario, Gerente
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login 
 
 class GerenteForm(forms.ModelForm):
     class Meta:
@@ -23,3 +25,18 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = ['nome', 'endereco', 'telefone', 'cpf', 'funcionario']
+
+def tela_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                # Redirecionar para a página desejada após o login
+                return redirect('home')  # Altere 'home' para sua página inicial
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
