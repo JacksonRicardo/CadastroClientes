@@ -181,7 +181,16 @@
             </tr>
         </table>
         <div id="button">
-            <button id="deletar" onclick="confirmDeleta()">Excluir</button>
+            <button id="deletar" onclick="confirmarExclusao()">Excluir</button>
+                <script>
+                function confirmarExclusao() {
+                    if (confirm('Tem certeza que deseja excluir este cliente?')) {
+                        window.location.href = "{% url 'deleta_cliente' cliente.pk %}";
+                    } else {
+                        return false;
+                    }
+                }
+                </script>
             <a id="update" href="{% url 'update_cliente' cliente.pk %}">Atualizar</a>
         </div>
         <div class="info-box">

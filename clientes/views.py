@@ -56,6 +56,10 @@ def deleta_cliente(request, pk):
     cliente.delete()
     return redirect('home') 
 
+def deleta_funcionario(request, pk):
+    funcionario = Funcionario.objects.get(pk=pk)
+    funcionario.delete()
+    return redirect('home')
 class FuncionarioCreateView(CreateView):
     model = Funcionario
     form_class = FuncionarioForm
@@ -85,13 +89,6 @@ def detalhes_gerente(request, pk):
         'funcionarios': funcionarios,  # Adiciona os funcionários gerenciados por este gerente ao contexto
     }
     return render(request, template_name="gerentes/gerente.html", context=contexto)
-
-
-def deleta_funcionario(request, pk):
-    funcionario = Funcionario.objects.get(pk=pk)
-    funcionario.delete()
-    return redirect('home')  
-
 class GerenteUpdateView(UpdateView):
     model = Gerente
     form_class = GerenteForm
