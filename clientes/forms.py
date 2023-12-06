@@ -19,7 +19,7 @@ class FuncionarioForm(forms.ModelForm):
 
     class Meta:
             model = Funcionario
-            fields = ['nome', 'apelido', 'snap', 'cpf', 'gerente']
+            fields = ['nome', 'empresa', 'instagram', 'cpf', 'gerente']
 class ClienteForm(forms.ModelForm):
     funcionario = forms.ModelChoiceField(queryset=Funcionario.objects.all(), required=False)
     class Meta:

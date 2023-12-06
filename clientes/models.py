@@ -7,8 +7,8 @@ class Gerente(models.Model):
 
 class Funcionario(models.Model):
     nome = models.CharField(max_length=255, verbose_name="Nome")
-    apelido = models.CharField(max_length=255, verbose_name="Apelido")
-    snap = models.CharField(max_length=255, verbose_name="Snap")
+    empresa = models.CharField(max_length=255, verbose_name="Empresa", null=True)
+    instagram = models.CharField(max_length=255, verbose_name="Instagram", null=True)
     cpf = models.CharField(max_length=255, verbose_name="CPF")
     gerente = models.ForeignKey(Gerente, on_delete=models.SET_NULL, null=True, blank=True, related_name='funcionarios', verbose_name="Gerente")
     
